@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDo List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'todolist/styles.css' %}">
+</head>
+<body>
+    <div class="title-container">
+        <h1>ToDo List</h1>
+    </div>
+
+    <div class="add-todo-container">
+        <form method="post" action="/add/">
+            {% csrf_token %}
+            <input type="text" name="title" class="add-todo-input" placeholder="Title" required>
+            <textarea name="description" placeholder="Description"></textarea>
+            <input type="datetime-local" name="due_date" placeholder="Due Date">
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+    <div class="todos-container">
+        <div class="todos current-todos">
+            <h2>Current ToDos</h2>
+            <ul>
+                {% for todo in todos %}
+                    <li class="todo-item">
+                        <div>
+                            <span><strong>{{ todo.title }}</strong></span><br>
+                            <span>{{ todo.description }}</span><br>
+                            <span>Due: {{ todo.due_date|date:"Y-m-d H:i" }}</span><br>
+                        </div>
+                        <div class="todo-item-actions">
+                            <a href="{% url 'edit_todo' todo.id %}" class="btn">Edit</a>
+                            <form method="post" action="/complete/{{ todo.id }}/" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn">Complete</button>
+                            </form>
+                            <form method="post" action="/delete/{{ todo.id }}/" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="todos completed-todos">
+            <h2>Completed ToDos</h2>
+            <ul>
+                {% for todo in completed_todos %}
+                    <li class="completed-item">
+                        <div>
+                            <span><strong>{{ todo.title }}</strong></span><br>
+                            <span>{{ todo.description }}</span><br>
+                            <span>Due: {{ todo.due_date|date:"Y-m-d H:i" }}</span><br>
+                        </div>
+                        <form method="post" action="/delete/{{ todo.id }}/" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="delete-all-container">
+        <form method="post" action="/delete_all/">
+            {% csrf_token %}
+            <button type="submit" class="delete-all-btn">Delete All</button>
+        </form>
+    </div>
+</body>
+</html>

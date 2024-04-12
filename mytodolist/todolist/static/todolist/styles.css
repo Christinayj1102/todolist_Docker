@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-container, .add-todo-container {
+    width: 90%;
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.add-todo-input, .add-todo-container form button, 
+.add-todo-container textarea, .add-todo-container input[type="datetime-local"],
+.add-todo-container select {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    width: 70%; 
+}
+
+.add-todo-container textarea, .add-todo-container select {
+    width: calc(70% - 22px); 
+    box-sizing: border-box;
+}
+
+.add-todo-container input[type="datetime-local"] {
+    width: calc(70% - 10px); 
+}
+
+.todos-container {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+}
+
+.todos {
+    flex: 1;
+    margin: 10px; 
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-width: 300px; 
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo-item, .completed-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.todo-item-details {
+    flex-grow: 1; 
+}
+
+.todo-item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-left: 10px; 
+}
+
+.todo-item-actions a, 
+.todo-item-actions button {
+    background-color: #008CBA;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2px 0; 
+}
+
+.todo-item-actions a:hover,
+.todo-item-actions button:hover {
+    background-color: #007B9E;
+}
+
+.delete-all-container {
+    width: 90%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.delete-all-btn {
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-all-btn:hover {
+    background-color: #007B9E;
+}
