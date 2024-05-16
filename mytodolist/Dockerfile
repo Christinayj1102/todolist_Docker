@@ -16,5 +16,5 @@ COPY . .
 # 포트 8000 열기
 EXPOSE 8000
 
-# 서버 실행
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# wait-for-it 스크립트를 사용하여 MariaDB가 준비될 때까지 기다린 후 Django 서버 실행
+CMD ["./wait-for-it.sh", "db:3306", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]

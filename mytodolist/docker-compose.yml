@@ -1,9 +1,24 @@
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command:  ./wait-for-it.sh db:3306 -- python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-      - ./data:/app/data 
+      - ./data:/app/data
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: todolist
+      MYSQL_USER: mariauser
+      MYSQL_PASSWORD: mariapassword
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+volumes:
+  mariadb_data:
